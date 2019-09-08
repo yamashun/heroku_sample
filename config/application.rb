@@ -18,8 +18,8 @@ module HerokuSample
 
     config.time_zone = 'Tokyo'
 
-    config.generators do |g|
-      g.template_engine :slim
-    end
+    # config.generators do |g|
+    #   g.template_engine :slim
+    # end
   end
 end
