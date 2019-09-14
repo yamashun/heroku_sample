@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_08_102140) do
+ActiveRecord::Schema.define(version: 2019_09_14_065806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,4 +23,23 @@ ActiveRecord::Schema.define(version: 2019_09_08_102140) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "registered_users", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "user_type"
+    t.integer "register_status"
+    t.string "nickname"
+    t.string "mail_address"
+    t.string "phone_number"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_registered_users_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "registered_users", "users"
 end
