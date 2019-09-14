@@ -1,0 +1,29 @@
+<h1>ログイン</h1>
+
+<%= form_for(@registered_user, url: sign_in_path) do |form| %>
+  <% if @errors.present? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@errors.count, "error") %> ログインに失敗しました</h2>
+
+      <ul>
+        <% @errors.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :mail_address %>
+    <%= form.text_field :mail_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
