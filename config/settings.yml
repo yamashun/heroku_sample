@@ -1,0 +1,2 @@
+base_auth:
+  redirect_uri: <%= ENV['BASE_OAUTH_RECIRECT_URI'] || 'https://hoge.fuga/' %>

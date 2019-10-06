@@ -1,5 +1,6 @@
 class BaseClientsController < ApplicationController
-  before_action :check_login, only: %i(new create)
+  before_action :check_login, only: %i(new create complete)
+  before_action :check_base_info_registered, only: %i(complete)
 
   def new
     @base_client = BaseClient.new
@@ -18,7 +19,9 @@ class BaseClientsController < ApplicationController
     end
   end
 
-  def complete; end
+  def complete
+    base_client.update!(auth_state: SecureRandom.hex(10))
+  end
 
   private
 
@@ -28,5 +31,9 @@ class BaseClientsController < ApplicationController
 
   def check_login
     redirect_to root_path unless logged_in?
+  end
+
+  def check_base_info_registered
+    redirect_to root_path if base_client.blank?
   end
 end

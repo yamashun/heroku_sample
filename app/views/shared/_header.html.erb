@@ -42,6 +42,9 @@
       <div class="navbar-item">
         <div class="buttons">
           <% if logged_in? %>
+            <% if current_user.shop? %>
+              <%= link_to 'BASE情報登録', base_clients_new_path, class: "button is-light" %>
+            <% end %>
             <%= link_to 'Logout', logout_path, class: "button is-light", method: :delete %>
           <% else %>
             <a class="button is-primary">

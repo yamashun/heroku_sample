@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Loginable
+  include BaseApiHelper
 
   helper_method %i(current_user logged_in?)
 
