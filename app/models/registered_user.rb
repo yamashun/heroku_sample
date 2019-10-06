@@ -9,8 +9,8 @@ class RegisteredUser < ApplicationRecord
   }
 
   enum user_type: {
-    administrator: 0,
-    shop:          1,
-    normal:        2,
+    admin:    0,
+    shop:      1,
+    normal:    2,
   }
 end

@@ -32,6 +32,8 @@ gem 'slim'
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'faraday'
 gem 'bulma-rails'
+gem "attr_encrypted", "~> 3.1.0"
+gem 'config'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

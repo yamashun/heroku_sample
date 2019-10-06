@@ -1,0 +1,24 @@
+<h1>Base接続情報登録画面</h1>
+<p>API接続申請で払い出された情報を登録します</p>
+
+<%= form_tag(base_clients_path, method: :post) do %>
+
+  <div class="field">
+    <%= label :base_client, :client_id %>
+    <%= text_field :base_client, :client_id %>
+  </div>
+
+  <div class="field">
+    <%= label :base_client, :client_secret %>
+    <%= text_field :base_client, :client_secret %>
+  </div>
+
+  <div class="field">
+    <%= label :base_client, :coupon_code %>
+    <%= text_field_tag 'base_client[coupon_code]', '' %>
+  </div>
+
+  <div class="actions">
+    <%= button_tag '登録する' %>
+  </div>
+<% end %>
