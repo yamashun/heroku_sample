@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'base_clients/new', to: 'base_clients#new'
   get 'base_clients/complete', to: 'base_clients#complete'
   post 'base_clients', to: 'base_clients#create'
+  get '/base_callback', to: 'base_callback#callback'
 
   resources :items
 
@@ -12,6 +13,6 @@ Rails.application.routes.draw do
   get '/login', to: redirect('/sign_in')
   delete '/logout', to: 'sessions#destroy'
 
-  # get '/base_callback', to: 'base_callback#callback'
+
 
 end

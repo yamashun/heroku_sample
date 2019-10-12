@@ -30,7 +30,7 @@ class BaseClientsController < ApplicationController
   end
 
   def check_login
-    redirect_to root_path unless logged_in?
+    redirect_to sign_in_path unless logged_in?
   end
 
   def check_base_info_registered
