@@ -22,9 +22,10 @@ RSpec.describe BaseClientService, type: :service do
 
       let!(:base_client) { create(:base_client) }
 
-      it 'アクセス・トークンが保存される' do
+      it 'アクセス・トークン、リフレッシュ・トークンが保存される' do
         BaseClientService.new(base_client).login
         expect(base_client.reload.access_token).to eq response_body['access_token']
+        expect(base_client.refresh_token).to eq response_body['refresh_token']
       end
     end
 

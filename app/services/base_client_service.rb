@@ -22,7 +22,10 @@ class BaseClientService
     }
     res = post_call_api('/1/oauth/token', payload)
     if res['access_token'].present?
-      @client.update!(access_token: res['access_token'])
+      @client.update!(
+        access_token: res['access_token'],
+        refresh_token: res['refresh_token']
+      )
       @bearer = res['access_token']
     else
       # TODO: error handling

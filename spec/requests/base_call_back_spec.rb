@@ -91,7 +91,7 @@ RSpec.describe BaseCallbackController, type: :request do
           allow(BaseClientService).to receive(:post).and_return(parsed_response)
         end
 
-        it 'access_tokenが保存され、TOP画面へリダイレクトされる' do
+        it '認可コードが保存され、TOP画面へリダイレクトされる' do
           subject
           expect(response).to redirect_to(root_path)
           expect(base_client.reload.code).to eq params[:code]
