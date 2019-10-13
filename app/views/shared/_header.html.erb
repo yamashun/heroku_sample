@@ -47,9 +47,7 @@
             <% end %>
             <%= link_to 'Logout', logout_path, class: "button is-light", method: :delete %>
           <% else %>
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
+            <%= link_to 'Sign up', sign_up_path, class: "button is-primary" %>
             <%= link_to 'Log in', login_path, class: "button is-light" %>
           <% end %>
         </div>
