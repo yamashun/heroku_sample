@@ -8,8 +8,8 @@ class BaseClientsController < ApplicationController
 
   def create
     @base_client = current_user.build_base_client(create_params.permit(:client_id, :client_secret))
-    if create_params[:coupon_code]
-      @base_client.base_coupons.build(code: create_params[:coupon_code])
+    if create_params.permit(:coupon_code).present?
+      @base_client.base_coupons.build(code: create_params.permit(:coupon_code))
     end
 
     if @base_client.save
@@ -26,7 +26,7 @@ class BaseClientsController < ApplicationController
   private
 
   def create_params
-    params.require(:base_client).permit(:client_id, :client_secret, :coupon_code)
+    params.require(:base_client)
   end
 
   def check_login
