@@ -1,0 +1,2 @@
+
+base_url: <%= ENV['BASE_URL'] || 'https://hoge.fuga/' %>
