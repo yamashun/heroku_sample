@@ -5,9 +5,10 @@ class BaseCallbackController < ApplicationController
     if base_client.update(code: call_back_params[:code])
       BaseClientService.new(base_client).login
       # TODO: change redirect path
-      redirect_to root_path
+      redirect_to root_path, notice: 'BASE APIへの接続が許可されました。'
     else
       # TODO: error handling
+      redirect_to root_path, notice: 'BASE APIへの接続に失敗しました'
     end
   end
 
