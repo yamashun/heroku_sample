@@ -1,0 +1,3 @@
+module BaseApp
+
+end
