@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2019_10_05_140115) do
 
-  create_table "base_clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "base_clients", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "client_id"
     t.string "redirect_uri"
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["user_id"], name: "index_base_clients_on_user_id"
   end
 
-  create_table "base_coupons", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "base_coupons", force: :cascade do |t|
     t.bigint "base_client_id"
     t.string "code", null: false
     t.string "name"
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["base_client_id"], name: "index_base_coupons_on_base_client_id"
   end
 
-  create_table "base_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "base_items", force: :cascade do |t|
     t.bigint "base_user_id", null: false
     t.integer "item_id"
     t.string "title"
@@ -68,7 +71,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["base_user_id"], name: "index_base_items_on_base_user_id"
   end
 
-  create_table "base_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "base_users", force: :cascade do |t|
     t.bigint "base_client_id", null: false
     t.bigint "user_id"
     t.string "shop_id"
@@ -90,7 +93,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["user_id"], name: "index_base_users_on_user_id"
   end
 
-  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "items", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.integer "price"
@@ -98,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "pre_user_registrations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "pre_user_registrations", force: :cascade do |t|
     t.bigint "user_id"
     t.datetime "expiration_datetime"
     t.string "mail_address"
@@ -110,7 +113,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["user_id"], name: "index_pre_user_registrations_on_user_id"
   end
 
-  create_table "registered_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "registered_users", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "user_type"
     t.integer "register_status"
@@ -123,7 +126,7 @@ ActiveRecord::Schema.define(version: 2019_10_05_140115) do
     t.index ["user_id"], name: "index_registered_users_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
