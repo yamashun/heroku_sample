@@ -1,4 +1,3 @@
 base_auth:
   redirect_uri: <%= ENV['BASE_OAUTH_RECIRECT_URI'] || 'https://hoge.fuga/' %>
-base_client_key: <%= ENV['BASE_CLIENT_KEY'] %>
-
+base_client_key: <%= ENV['BASE_CLIENT_KEY'] || '118b63122aab92ff8483d1241c9ad3c4' %>

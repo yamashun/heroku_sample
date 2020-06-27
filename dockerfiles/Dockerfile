@@ -15,6 +15,7 @@ RUN apk upgrade --no-cache && \
       linux-headers \
       libxml2-dev \
       libxslt-dev \
+      postgresql-dev \
       mysql-client \
       mysql-dev \
       ruby-dev \
