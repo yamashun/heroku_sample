@@ -9,24 +9,17 @@ jobs:
       - image: 'cimg/ruby:2.6.5-node'
     steps:
       - checkout
-      - run:
-          name: set mysql library
-          command: |
-            sudo apt update
-            sudo apt install default-mysql-client
-      - ruby/install-deps:
-          key: gems-v2
+      - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
   test:
     docker:
       - image: 'cimg/ruby:2.6.5-node'
-      - image: circleci/mysql:5.7-ram
+      - image: 'circleci/postgres:9.5-alpine'
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: 1
-          MYSQL_DATABASE: heroku_sample_test
-          MYSQL_USER: root
-          MYSQL_HOST: 127.0.0.1
+          POSTGRES_DB: heroku_sample_development
+          POSTGRES_PASSWORD: ''
+          POSTGRES_USER: test-user
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
@@ -39,7 +32,7 @@ jobs:
       - node/install-packages:
           pkg-manager: yarn
       - run:
-          command: 'dockerize -wait tcp://localhost:3306 -timeout 1m'
+          command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
           name: Wait for DB
       - run:
           command: 'bundle exec rails db:schema:load --trace'
