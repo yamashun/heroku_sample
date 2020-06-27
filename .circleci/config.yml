@@ -20,13 +20,11 @@ jobs:
   test:
     docker:
       - image: 'cimg/ruby:2.6.5-node'
-      - image: 'mysql:5.7'
+      - image: circleci/mysql:5.7-ram
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ALLOW_EMPTY_PASSWORD: 1
           MYSQL_DATABASE: heroku_sample_test
           MYSQL_USER: root
-          MYSQL_PASSWORD: rails1234
-          MYSQL_ROOT_PASSWORD: rails1234
           MYSQL_HOST: 127.0.0.1
     environment:
       BUNDLE_JOBS: '3'
