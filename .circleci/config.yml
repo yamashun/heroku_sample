@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: sudo apt install libmysqlclient-dev
+          command: sudo apt-get install -y libmysqlclient-dev
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
