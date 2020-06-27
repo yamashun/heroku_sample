@@ -13,7 +13,7 @@ jobs:
           name: set mysql library
           command: |
             sudo apt update
-            sudo apt install libmariadb-dev
+            sudo apt install default-mysql-client
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
