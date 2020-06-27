@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: sudo yum install mysql-devel
+          command: sudo apt install libmysqlclient-dev
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
