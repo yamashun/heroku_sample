@@ -9,6 +9,8 @@ jobs:
       - image: 'cimg/ruby:2.6.5-node'
     steps:
       - checkout
+      - run:
+          command: sudo yum install mysql-devel
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
