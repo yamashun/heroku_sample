@@ -1,0 +1,56 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+  ruby: circleci/ruby@1.0.4
+
+jobs:
+  build:
+    docker:
+      - image: 'cimg/ruby:2.6.5-node'
+    steps:
+      - checkout
+      - run:
+          command: |
+            sudo apt update
+            sudo apt install -y libpq-dev postgresql-client
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+  test:
+    docker:
+      - image: 'cimg/ruby:2.6.5-node'
+      - image: 'circleci/postgres:10.1-alpine'
+        environment:
+          POSTGRES_DB: heroku_sample_test
+          POSTGRES_PASSWORD: ''
+          POSTGRES_USER: test-user
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      DB_HOST: 127.0.0.1
+      RAILS_ENV: test
+    parallelism: 1
+    steps:
+      - checkout
+      - run:
+          command: |
+            sudo apt update
+            sudo apt install -y libpq-dev postgresql-client
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
+          name: Wait for DB
+      - run:
+          command: 'bundle exec rails db:schema:load --trace'
+          name: Database setup
+      - ruby/rspec-test
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
