@@ -13,7 +13,7 @@ jobs:
           name: set mysql library
           command: |
             sudo apt update
-            sudo apt-get install libmariadb-dev
+            sudo apt install libmariadb-dev
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
@@ -28,7 +28,6 @@ jobs:
           MYSQL_PASSWORD: rails1234
           MYSQL_ROOT_PASSWORD: rails1234
           MYSQL_HOST: 127.0.0.1
-          MYSQL_ROOT_HOST: '%'
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
