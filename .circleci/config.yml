@@ -32,6 +32,10 @@ jobs:
     parallelism: 1
     steps:
       - checkout
+      - run:
+          command: |
+            sudo apt update
+            sudo apt install -y libpq-dev postgresql-client
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
