@@ -14,7 +14,8 @@ jobs:
           command: |
             sudo apt update
             sudo apt install default-mysql-client
-      - ruby/install-deps
+      - ruby/install-deps:
+          key: gems-v2
       - node/install-packages:
           pkg-manager: yarn
   test:
