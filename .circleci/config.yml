@@ -1,0 +1,52 @@
+jobs:
+  build:
+    docker:
+      - image: 'cimg/ruby:2.6.5-node'
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          cache-key: yarn.lock
+          pkg-manager: yarn
+  test:
+    docker:
+      - image: 'cimg/ruby:2.6.5-node'
+      - image: 'mysql:5.7'
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_DATABASE: heroku_sample_test
+          MYSQL_USER: root
+          MYSQL_PASSWORD: rails1234
+          MYSQL_ROOT_PASSWORD: rails1234
+          MYSQL_HOST: 127.0.0.1
+          MYSQL_ROOT_HOST: %
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      DB_HOST: 127.0.0.1
+      RAILS_ENV: test
+    parallelism: 1
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          cache-key: yarn.lock
+          pkg-manager: yarn
+      - run:
+          command: 'dockerize -wait tcp://localhost:3306 -timeout 1m'
+          name: Wait for DB
+      - run:
+          command: 'bundle exec rails db:schema:load --trace'
+          name: Database setup
+      - ruby/rspec-test
+orbs:
+  node: circleci/node@3.0.0
+  ruby: circleci/ruby@1.0.4
+version: 2.1
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
