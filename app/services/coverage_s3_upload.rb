@@ -19,7 +19,11 @@ class CoverageS3Upload
     end
 
     result = hash['metrics']
-    result['date'] = Date.today.strftime('%Y-%m-%d')
+    today = Date.today
+    result['date'] = today.strftime('%Y-%m-%d')
+    result['year'] = today.year
+    result['month'] = today.month
+    result['day'] = today.day
     result['time'] = result['time'] = Time.now.strftime('%Y-%m-%d %H:%M:%S')
     File.write("#{::Rails.root}/coverage/coverage_summary.json", result.to_json)
   end
