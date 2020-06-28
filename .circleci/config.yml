@@ -58,6 +58,8 @@ jobs:
           destination: coverage
       - run:
           name: upload summary to s3
+          environment:
+            AWS_REGION: ap-northeast-1
           command: |
             bundle exec rake coverage:upload
 
