@@ -3,7 +3,11 @@ class CoverageS3Upload
     bucket = Aws::S3::Resource.new.bucket(ENV['COVERAGE_BUCKET'])
     create_summary_json
     file = File.open("#{::Rails.root}/coverage/coverage_summary.json","r")
-    bucket.put_object(body: file, key: "all/#{Date.today.strftime('%Y-%m')}/coverage-#{Time.now.strftime('%d-%H-%M-%S')}.json")
+    bucket.put_object(
+      body: file,
+      key: "all/#{Date.today.strftime('%Y-%m')}/coverage-#{Time.now.strftime('%d-%H-%M-%S')}.json",
+      content_type: 'application/json'
+    )
   end
 
   private
