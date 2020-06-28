@@ -45,8 +45,15 @@ jobs:
       - run:
           command: 'bundle exec rails db:schema:load --trace'
           name: Database setup
-      - ruby/rspec-test
-      - store_coverage:
+      - run:
+          name: RSpec
+          command: |
+            mkdir -p /tmp/test-results/rspec
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+            bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec/results.xml --format progress
+      - store_test_results:
+          path: /tmp/test-results/rspec
+      - store_artifacts:
           path: ~/coverage
           destination: coverage
 
