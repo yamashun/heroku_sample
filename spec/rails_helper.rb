@@ -6,9 +6,11 @@ require File.expand_path('../config/environment', __dir__)
 
 require 'simplecov'
 require 'simplecov-json'
+require 'codecov'
 SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
   SimpleCov::Formatter::JSONFormatter,
+  SimpleCov::Formatter::Codecov,
 ])
 SimpleCov.start 'rails'
 
