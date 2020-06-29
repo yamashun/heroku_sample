@@ -7,17 +7,20 @@ require File.expand_path('../config/environment', __dir__)
 require 'simplecov'
 require 'simplecov-json'
 require 'codecov'
+require 'coveralls'
 formatters  = if ENV['CIRCLE_ARTIFACTS']
                 [
                   SimpleCov::Formatter::HTMLFormatter,
                   SimpleCov::Formatter::JSONFormatter,
                   SimpleCov::Formatter::Codecov,
+                  Coveralls::SimpleCov::Formatter,
                 ]
               else
                 [
                   SimpleCov::Formatter::HTMLFormatter,
                   SimpleCov::Formatter::JSONFormatter,
                   SimpleCov::Formatter::Codecov,
+                  Coveralls::SimpleCov::Formatter,
                 ]
               end
 

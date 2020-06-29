@@ -67,6 +67,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-json', :require => false
   gem 'codecov', :require => false
+  gem 'coveralls', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
