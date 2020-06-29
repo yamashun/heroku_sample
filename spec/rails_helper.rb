@@ -7,11 +7,20 @@ require File.expand_path('../config/environment', __dir__)
 require 'simplecov'
 require 'simplecov-json'
 require 'codecov'
-SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter,
-  SimpleCov::Formatter::JSONFormatter,
-  SimpleCov::Formatter::Codecov,
-])
+formatters  = if ENV['CIRCLE_ARTIFACTS']
+                [
+                  SimpleCov::Formatter::HTMLFormatter,
+                  SimpleCov::Formatter::JSONFormatter,
+                  SimpleCov::Formatter::Codecov,
+                ]
+              else
+                [
+                  SimpleCov::Formatter::HTMLFormatter,
+                  SimpleCov::Formatter::JSONFormatter,
+                ]
+              end
+
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(formatters)
 SimpleCov.start 'rails'
 
 # Prevent database truncation if the environment is production
