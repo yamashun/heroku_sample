@@ -17,6 +17,7 @@ formatters  = if ENV['CIRCLE_ARTIFACTS']
                 [
                   SimpleCov::Formatter::HTMLFormatter,
                   SimpleCov::Formatter::JSONFormatter,
+                  SimpleCov::Formatter::Codecov,
                 ]
               end
 
